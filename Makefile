@@ -18,16 +18,16 @@ down:
 
 re: fclean all
 
-clean: $(down)
+clean: down
 	rm -r /home/ysay/data
 
-fclean: clean c_n c_v c_i
+fclean: clean  c_i c_v c_n
 	echo 'ok'
 c_i:
-	docker rmi $$(docker image ls -q)
+	docker rmi -f $$(docker image ls -q)
 c_n:
-	docker network rm $$(docker network ls -q)
+	docker network rm -f $$(docker network ls -q)
 c_v:
-	docker volume rm $$(docker volume ls -q)
+	docker volume rm -f $$(docker volume ls -q)
 
 .PHONY: up down re clean fclean
